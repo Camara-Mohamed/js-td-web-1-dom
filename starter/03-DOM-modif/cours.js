@@ -22,10 +22,15 @@ EXERCICE 1 :
 	(Aide : on lui ajoute (opérateur+=) une entrée sous la forme d'une balise <li>)
 3. Vider la liste de tout son contenu et la réafficher
 */
+let ulElt = document.getElementById('langages');
+console.log(ulElt);
 
 
+ulElt.innerHTML += '<li id="c">C</li>';
+console.log(ulElt.innerHTML);
 
-
+ulElt.innerHTML = "";
+console.log(ulElt.innerHTML);
 
 // 2. Le contenu textuel
 /*
@@ -36,8 +41,8 @@ EXERCICE 2 :
 Compléter le titre du document pour qu'il devienne
 "Quelques langages de programmation" et le réafficher
 */
-
-
+document.title = "Quelques langages de programmation";
+console.log(document.title);
 
 
 // 3. Les attributs
@@ -53,9 +58,14 @@ EXERCICE 3 :
 	- avec la méthode setAttribute()
 	- via la propriété id de l'élément h1
 */
+let titreElt = document.querySelector('h1');
+console.log(titreElt);
 
+titreElt.setAttribute('id', 'titre');
+console.log(titreElt);
 
-
+titreElt.id = "titre";
+console.log(titreElt);
 
 // 4. Les classes
 /*
@@ -72,9 +82,9 @@ EXERCICE 4 :
 - Lui ajouter la classe "titre"
 - L'afficher
 */
-
-
-
+titreElt.classList.remove("debut");
+titreElt.classList.add("titre");
+console.log(titreElt);
 
 /*
 EXERCICE 5 : 
@@ -84,10 +94,18 @@ EXERCICE 5 :
 - Ajouter la classe "hide" manuellement dans le fichier HTML
 - Retester le script
 */
+let liElt = document.querySelector("#langages li");
 
-
-
-
+if (liElt !== null) {
+    if (liElt.classList.contains("hide")) {
+        liElt.classList.remove("hide");
+    } else {
+        liElt.classList.add("hide");
+    }
+    console.log(liElt);
+} else {
+    console.log("L'élément li est introuvable");
+}
 
 /***********************************************
  **********/
@@ -120,21 +138,32 @@ Ajouter le langage "ruby" à la liste des langages :
 - 3. L'ajouter dans l'ul d'id "langages"
 - 4. Afficher le contenu HTML de l'ul
 */
-
-
-
+let rubyElt = document.createElement("li");
 
 // 2. Variantes pour ajouter un élément
 
 // 2.1. Création d'un noeud textuel avec la méthode createTextNode()
+let pythonElt = document.createElement("li");
+pythonElt.id = "python";
 
+let textePython = document.createTextNode("Python");
+pythonElt.appendChild(textePython);
 
+ulElt.appendChild(pythonElt);
+console.log(ulElt.innerHTML);
 
 // 2.2. Ajout d'un noeud avant un autre noeud avec la méthode insertBefore()
+let javaElt = document.createElement("li");
+javaElt.id = "java";
+javaElt.textContent = "Java";
 
-
+ulElt.insertBefore(javaElt, ulElt.firstChild);
+console.log(ulElt.innerHTML);
 
 // 2.3. Choix de la position exacte du nouveau noeud
+ulElt.insertAdjacentHTML("afterbegin", '<li id="javascript">JavaScript</li>');
+console.log(ulElt.innerHTML);
+
 /*
 On peut définir encore plus précisément la position des éléments insérés avec la méthode insertAdjacentHTML(), qui 
 - est une méthode d'un élément existant
@@ -151,10 +180,8 @@ Ajouter le langage "JavaScript" au tout début de la liste des langages
 dans une li d'id "javascript" avec la méthode insertAdjacentHTML()
 puis afficher le contenu HTML de l'ul
 */
-
-
-
-
+ulElt.insertAdjacentHTML("afterbegin", '<li id="javascript">JavaScript</li>');
+console.log(ulElt.innerHTML);
 
 /***********************************************
  **********/
@@ -172,10 +199,18 @@ EXERCICE 8 :
 - Remplacer le langage C# par un nouvel élément correspondant au langage CSS
 - Afficher le contenu HTML de la liste ainsi modifiée
 */
+let cssElt = document.createElement("li");
+cssElt.id = "css";
+cssElt.textContent = "CSS";
 
+let csharpElt = document.getElementById("csharp");
 
-
-
+if (csharpElt !== null) {
+    ulElt.replaceChild(cssElt, csharpElt);
+    console.log(ulElt.innerHTML);
+} else {
+    console.log("L'élément C# est introuvable dans la liste.");
+}
 
 // 2. Supprimer un noeud existant
 /* La méthode removeChild() permet de supprimer un nœud, elle
@@ -187,7 +222,10 @@ EXERCICE 9 :
 - Supprimer l'élément correspondant au langage CSS que vous venez d'insérer
 - Réaffichez la liste des langages
 */
-
-
-
+if (ulElt.contains(cssElt)) {
+    ulElt.removeChild(cssElt);
+    console.log(ulElt.innerHTML);
+} else {
+    console.log("L'élément CSS n'est pas un enfant du parent.");
+}
 
